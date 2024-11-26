@@ -1,0 +1,120 @@
+{
+  "categories": [
+    {
+      "name": "Men's Fashion",
+      "subcategories": [
+        {
+          "name": "Winterwear",
+          "subcategories": [
+            { "name": "Sweaters" },
+            { "name": "Jackets" },
+            { "name": "Thermals" }
+          ]
+        },
+        {
+          "name": "Summerwear",
+          "subcategories": [
+            { "name": "T-Shirts" },
+            { "name": "Shorts" },
+            { "name": "Casual Shirts" }
+          ]
+        },
+        {
+          "name": "Footwear",
+          "subcategories": [
+            { "name": "Formal Shoes" },
+            { "name": "Sneakers" },
+            { "name": "Sandals" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Women's Fashion",
+      "subcategories": [
+        {
+          "name": "Winterwear",
+          "subcategories": [
+            { "name": "Coats" },
+            { "name": "Cardigans" },
+            { "name": "Scarves" }
+          ]
+        },
+        {
+          "name": "Summerwear",
+          "subcategories": [
+            { "name": "Dresses" },
+            { "name": "Tops" },
+            { "name": "Skirts" }
+          ]
+        },
+        {
+          "name": "Accessories",
+          "subcategories": [
+            { "name": "Bags" },
+            { "name": "Jewelry" },
+            { "name": "Sunglasses" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Kids' Fashion",
+      "subcategories": [
+        {
+          "name": "Boys' Wear",
+          "subcategories": [
+            { "name": "T-Shirts" },
+            { "name": "Jeans" },
+            { "name": "Jackets" }
+          ]
+        },
+        {
+          "name": "Girls' Wear",
+          "subcategories": [
+            { "name": "Dresses" },
+            { "name": "Skirts" },
+            { "name": "Leggings" }
+          ]
+        },
+        {
+          "name": "Footwear",
+          "subcategories": [
+            { "name": "Sports Shoes" },
+            { "name": "Sandals" },
+            { "name": "Boots" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Home Essentials",
+      "subcategories": [
+        {
+          "name": "Bed Linen",
+          "subcategories": [
+            { "name": "Bed Sheets" },
+            { "name": "Pillow Covers" },
+            { "name": "Blankets" }
+          ]
+        },
+        {
+          "name": "Kitchenware",
+          "subcategories": [
+            { "name": "Cookware" },
+            { "name": "Utensils" },
+            { "name": "Storage Containers" }
+          ]
+        },
+        {
+          "name": "Decor",
+          "subcategories": [
+            { "name": "Wall Art" },
+            { "name": "Vases" },
+            { "name": "Lighting" }
+          ]
+        }
+      ]
+    }
+  ]
+}

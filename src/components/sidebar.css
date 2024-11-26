@@ -1,0 +1,91 @@
+.sidebar_parent {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  background-color: #262626;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: white;
+}
+
+.close_icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  z-index: 10;
+}
+.profile_container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 18px;
+  padding: 30px 20px;
+}
+.profile_image_container {
+  border-radius: 500px;
+  border: 2px solid #efefef;
+  background-color: white;
+  padding: 8px;
+}
+
+.sepration_line {
+  border-top: 2px solid white;
+}
+
+.notice_support_container {
+  display: flex;
+  margin-top: 10px;
+}
+
+.support_container,
+.notice_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  width: 50%;
+  position: relative;
+}
+
+.notice_container::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 0px;
+  height: 168%;
+  background-color: rgb(182, 182, 182);
+  width: 2px;
+}
+
+.sidebar_options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0px;
+}
+
+.individual_option_container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+  gap: 10px;
+  cursor: pointer;
+  text-decoration: unset;
+}
+
+.individual_option_container:hover {
+  background-color: rgb(57, 57, 57);
+  padding-left: 18px;
+  transition: all 0.1s ease-in;
+}
+
+/* media queries */
+@media screen and (max-width: 768px) {
+}

@@ -1,0 +1,120 @@
+.single_catalog_header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+}
+
+.header_text_parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.single_catalog_header_title {
+  font-size: 24px;
+  font-weight: 500;
+  color: black;
+}
+
+.single_catalog_header_text {
+  color: #696969;
+  font-weight: 500;
+}
+
+.single_catalog_header_text:hover {
+  color: blue;
+  transition: all 0.5s ease-in-out;
+}
+.youtube_icon {
+  animation: needHelp 1.5s linear infinite;
+}
+
+.single_catalog_status_parent {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 50px;
+  margin-top: 10px;
+}
+
+.status_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  color: #656565;
+  font-size: 16px;
+  padding: 10px 12px;
+}
+
+.status_number {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background-color: #d8d8d8;
+}
+
+.status_active {
+  color: #2022a5;
+  position: relative;
+}
+
+.status_active::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #2022a5;
+}
+
+.need_help_btn {
+  background-color: #e1d5ec;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+}
+
+/* animations */
+@keyframes needHelp {
+  0% {
+    padding-bottom: 0px;
+    transform: rotateZ(0deg);
+  }
+  25% {
+    padding-bottom: 3px;
+    transform: rotateZ(5deg);
+  }
+  50% {
+    padding-bottom: 3px;
+    transform: rotateZ(0deg);
+  }
+  75% {
+    padding-bottom: 3px;
+    transform: rotateZ(-5deg);
+  }
+  100% {
+    padding-bottom: 0px;
+    transform: rotateZ(0deg);
+  }
+}
+
+/* media queries */
+@media only screen and (max-width: 768px) {
+}
