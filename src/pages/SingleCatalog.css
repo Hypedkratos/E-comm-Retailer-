@@ -129,7 +129,13 @@
   width: 500px;
   padding: 10px;
   font-size: 16px;
+  padding-left: 40px;
   margin-left: 30px;
+  border-radius: 2px;
+}
+
+.search-container input:focus {
+  outline: 2px solid #cfcfcf;
 }
 
 .dropdown-container {

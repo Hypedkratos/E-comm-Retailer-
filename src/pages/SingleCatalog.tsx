@@ -152,7 +152,7 @@ const SingleCatalog: React.FC = () => {
           />
           <input
             type="text"
-            placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search for a  product or category..."
+            placeholder="Search for a  product or category..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
