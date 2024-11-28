@@ -34,7 +34,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 0px 50px;
+  padding: 0px 0px;
   margin-top: 10px;
 }
 
@@ -43,6 +43,7 @@
   justify-content: center;
   align-items: center;
   gap: 5px;
+  padding-left: 40px;
 }
 
 .status {
@@ -89,6 +90,7 @@
   align-items: center;
   gap: 10px;
   padding: 5px;
+  margin-right: 45px;
 }
 
 /* animations */
@@ -115,6 +117,129 @@
   }
 }
 
+.search_section_main {
+  padding: 30px 10px;
+}
+
+.search-container {
+  margin: 15px 0px;
+  width: 100%;
+}
+.search-container input {
+  width: 500px;
+  padding: 10px;
+  font-size: 16px;
+  margin-left: 30px;
+}
+
+.dropdown-container {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.dropdown {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  width: 200px;
+}
+
+.dropdown h4 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.dropdown ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown li {
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.dropdown li:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown li.selected {
+  background-color: #007bff;
+  color: white;
+}
+
+.selected-path {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #333;
+}
+
 /* media queries */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
+  .single_catalog_header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 15px;
+    gap: 10px;
+  }
+  .status_container {
+    padding-left: 10px;
+  }
+  .back_icon {
+    padding-top: 4px;
+  }
+  .single_catalog_header_text {
+    font-size: 10px;
+  }
+
+  .help_right {
+    padding: 5px 15px;
+  }
+
+  .single_catalog_status_parent {
+    margin-top: unset;
+    justify-content: center;
+    gap: 30px;
+    padding: 0px 0px;
+  }
+
+  .status {
+    padding: 0px 0px;
+    font-size: 12px;
+  }
+  .need_help_btn {
+    padding: 3px;
+    gap: 3px;
+    text-align: center;
+    width: 60px;
+    margin-right: 10px;
+  }
+  .need_help_btn_text {
+    font-size: 10px;
+  }
+  .youtube_icon {
+    animation: none;
+  }
+  .search_section_main {
+    padding: 20px 10px;
+  }
+  .search-container input {
+    width: 340px;
+  }
+  .search_placeholder_text {
+    padding-left: unset;
+  }
+  .search-container {
+    margin: 5px 0px;
+  }
+  .search-container input {
+    margin-left: unset;
+  }
+  .search_icon {
+    position: absolute;
+    left: 10px;
+  }
 }

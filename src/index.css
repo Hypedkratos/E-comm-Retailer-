@@ -20,3 +20,7 @@ h5,
 h6 {
   margin-bottom: unset;
 }
+
+* {
+  box-sizing: unset;
+}
