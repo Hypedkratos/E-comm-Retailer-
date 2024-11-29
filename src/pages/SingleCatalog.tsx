@@ -3,10 +3,9 @@ import React, { useState, useEffect } from "react";
 import "./SingleCatalog.css";
 import { Link } from "react-router-dom";
 /* icons */
-import { IoChevronBackOutline } from "react-icons/io5";
+import { IoChevronBackOutline, IoSearchOutline } from "react-icons/io5";
 import { TbBrandYoutubeFilled } from "react-icons/tb";
 import { BiSupport } from "react-icons/bi";
-import { IoSearchOutline } from "react-icons/io5";
 /* components */
 import mockData from "../assets/mockData/categoryMockData.json";
 /* interfaces */
@@ -21,6 +20,7 @@ const SingleCatalog: React.FC = () => {
   const [subSubCategories, setSubSubCategories] = useState<any[]>([]);
   const [selectedSubSubCategory, setSelectedSubSubCategory] = useState("");
   const [selectedPath, setSelectedPath] = useState("");
+  const [isImgSelected, setIsImgSelected] = useState<boolean>(false);
 
   // Update subcategories when a main category is selected
   useEffect(() => {
@@ -56,21 +56,34 @@ const SingleCatalog: React.FC = () => {
   // Search logic
   useEffect(() => {
     if (searchTerm) {
-      categories.forEach((category) => {
-        category.subcategories.forEach((subCategory) => {
-          subCategory.subcategories.forEach((subSubCategory) => {
+      let found = false;
+
+      for (const category of categories) {
+        for (const subCategory of category.subcategories) {
+          for (const subSubCategory of subCategory.subcategories) {
             if (
-              searchTerm
+              subSubCategory.name
                 .toLowerCase()
-                .includes(subSubCategory.name.toLowerCase())
+                .includes(searchTerm.toLowerCase())
             ) {
               setSelectedCategory(category.name);
               setSelectedSubCategory(subCategory.name);
               setSelectedSubSubCategory(subSubCategory.name);
+              found = true;
+              break;
             }
-          });
-        });
-      });
+          }
+          if (found) break;
+        }
+        if (found) break;
+      }
+
+      if (!found) {
+        setSelectedCategory("");
+        setSelectedSubCategory("");
+        setSelectedSubSubCategory("");
+        setSelectedPath("");
+      }
     }
   }, [searchTerm, categories]);
 
@@ -151,8 +164,9 @@ const SingleCatalog: React.FC = () => {
             className="search_icon absolute left-10 top-3 text-center"
           />
           <input
+            id="search-input"
             type="text"
-            placeholder="Search for a  product or category..."
+            placeholder="Search for a product or category..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -160,15 +174,18 @@ const SingleCatalog: React.FC = () => {
 
         <div className="dropdown-container">
           <div className="dropdown">
-            <h4>Main Category</h4>
             <ul>
-              {categories.map((category) => (
+              {categories.map((category, index) => (
                 <li
-                  key={category.name}
-                  className={
+                  key={index}
+                  className={`${
                     selectedCategory === category.name ? "selected" : ""
-                  }
-                  onClick={() => setSelectedCategory(category.name)}
+                  }`}
+                  onClick={() => {
+                    setSelectedCategory(category.name);
+                    setSubCategories(category.subcategories || []);
+                    setSubSubCategories([]);
+                  }}
                 >
                   {category.name}
                 </li>
@@ -178,15 +195,17 @@ const SingleCatalog: React.FC = () => {
 
           {subCategories.length > 0 && (
             <div className="dropdown">
-              <h4>Subcategory</h4>
               <ul>
-                {subCategories.map((subCategory) => (
+                {subCategories.map((subCategory, index) => (
                   <li
-                    key={subCategory.name}
-                    className={
+                    key={index}
+                    className={`${
                       selectedSubCategory === subCategory.name ? "selected" : ""
-                    }
-                    onClick={() => setSelectedSubCategory(subCategory.name)}
+                    }`}
+                    onClick={() => {
+                      setSelectedSubCategory(subCategory.name);
+                      setSubSubCategories(subCategory.subcategories || []);
+                    }}
                   >
                     {subCategory.name}
                   </li>
@@ -197,16 +216,15 @@ const SingleCatalog: React.FC = () => {
 
           {subSubCategories.length > 0 && (
             <div className="dropdown">
-              <h4>Sub-Subcategory</h4>
               <ul>
-                {subSubCategories.map((subSubCategory) => (
+                {subSubCategories.map((subSubCategory, index) => (
                   <li
-                    key={subSubCategory.name}
-                    className={
+                    key={index}
+                    className={`${
                       selectedSubSubCategory === subSubCategory.name
                         ? "selected"
                         : ""
-                    }
+                    }`}
                     onClick={() =>
                       setSelectedSubSubCategory(subSubCategory.name)
                     }
@@ -217,10 +235,26 @@ const SingleCatalog: React.FC = () => {
               </ul>
             </div>
           )}
-        </div>
 
-        <div className="selected-path">
-          {selectedPath && <h4>{selectedPath}</h4>}
+          <div className="image_upload_section">
+            <div className="bg-gray-200 path_container">
+              {selectedPath ? (
+                <h4>{selectedPath}</h4>
+              ) : (
+                "No category or subcategory selected"
+              )}
+            </div>
+            <div className="image_text_container">
+              {isImgSelected ? (
+                "image is selected"
+              ) : (
+                <img
+                  src="/images/placeholder-image.png"
+                  alt="placeholder-image"
+                />
+              )}
+            </div>
+          </div>
         </div>
       </div>
       {/* search section end */}
