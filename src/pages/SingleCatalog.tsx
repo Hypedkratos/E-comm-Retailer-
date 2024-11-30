@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import { IoChevronBackOutline, IoSearchOutline } from "react-icons/io5";
 import { TbBrandYoutubeFilled } from "react-icons/tb";
 import { BiSupport } from "react-icons/bi";
+import { MdFileUpload } from "react-icons/md";
+import { FaCircleCheck } from "react-icons/fa6";
+import { FaPlus } from "react-icons/fa6";
 /* components */
 import mockData from "../assets/mockData/categoryMockData.json";
 /* interfaces */
@@ -21,7 +24,7 @@ const SingleCatalog: React.FC = () => {
   const [selectedSubSubCategory, setSelectedSubSubCategory] = useState("");
   const [selectedPath, setSelectedPath] = useState("");
   const [isImgSelected, setIsImgSelected] = useState<boolean>(false);
-
+  const [file, setFile] = useState<File | null>(null);
   // Update subcategories when a main category is selected
   useEffect(() => {
     if (selectedCategory) {
@@ -87,6 +90,18 @@ const SingleCatalog: React.FC = () => {
     }
   }, [searchTerm, categories]);
 
+  // functions
+  const handleImageUpload = (e) => {
+    if (selectedPath == "") {
+      alert("Please select a category first");
+    } else {
+      console.log(e.target.files);
+      setFile(URL.createObjectURL(e.target.files[0]));
+      setIsImgSelected(true);
+      setIsAddProduct(true);
+    }
+  };
+
   return (
     <div className="single_catalog_main_container w-[100vw] h-[100vh]">
       {/* header section start */}
@@ -121,13 +136,11 @@ const SingleCatalog: React.FC = () => {
               !isAddProduct && "status_active"
             }`}
           >
-            <div
-              className={`status_number ${
-                !isAddProduct && "status_number_selected"
-              }`}
-            >
-              1
-            </div>
+            {isAddProduct ? (
+              <FaCircleCheck size={22} color="#2ba52b" />
+            ) : (
+              <div className="status_number">1</div>
+            )}
             Select Category
           </div>
           <div
@@ -135,13 +148,7 @@ const SingleCatalog: React.FC = () => {
               isAddProduct && "status_active"
             }`}
           >
-            <div
-              className={`status_number ${
-                !isAddProduct && "status_number_selected"
-              }`}
-            >
-              2
-            </div>
+            <div className="status_number">2</div>
             Add Product Details
           </div>
         </div>
@@ -154,110 +161,146 @@ const SingleCatalog: React.FC = () => {
       </div>
       {/* single catalog status section end */}
       {/* search section start */}
-      <div className="search_section_main">
-        <span className="search_placeholder_text text-[18px] font-medium pl-8">
-          Search Category
-        </span>
-        <div className="search-container relative">
-          <IoSearchOutline
-            size={18}
-            className="search_icon absolute left-10 top-3 text-center"
-          />
-          <input
-            id="search-input"
-            type="text"
-            placeholder="Search for a product or category..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
-
-        <div className="dropdown-container">
-          <div className="dropdown">
-            <ul>
-              {categories.map((category, index) => (
-                <li
-                  key={index}
-                  className={`${
-                    selectedCategory === category.name ? "selected" : ""
-                  }`}
-                  onClick={() => {
-                    setSelectedCategory(category.name);
-                    setSubCategories(category.subcategories || []);
-                    setSubSubCategories([]);
-                  }}
-                >
-                  {category.name}
-                </li>
-              ))}
-            </ul>
+      {!isAddProduct && (
+        <div className="search_section_main">
+          <span className="search_placeholder_text text-[18px] font-medium pl-8">
+            Search Category
+          </span>
+          <div className="search-container relative">
+            <IoSearchOutline
+              size={18}
+              className="search_icon absolute left-10 top-3 text-center"
+            />
+            <input
+              id="search-input"
+              type="text"
+              placeholder="Search for a product or category..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
           </div>
 
-          {subCategories.length > 0 && (
+          <div className="dropdown-container">
             <div className="dropdown">
               <ul>
-                {subCategories.map((subCategory, index) => (
+                {categories.map((category, index) => (
                   <li
                     key={index}
                     className={`${
-                      selectedSubCategory === subCategory.name ? "selected" : ""
+                      selectedCategory === category.name ? "selected" : ""
                     }`}
                     onClick={() => {
-                      setSelectedSubCategory(subCategory.name);
-                      setSubSubCategories(subCategory.subcategories || []);
+                      setSelectedCategory(category.name);
+                      setSubCategories(category.subcategories || []);
+                      setSubSubCategories([]);
                     }}
                   >
-                    {subCategory.name}
+                    {category.name}
                   </li>
                 ))}
               </ul>
             </div>
-          )}
 
-          {subSubCategories.length > 0 && (
-            <div className="dropdown">
-              <ul>
-                {subSubCategories.map((subSubCategory, index) => (
-                  <li
-                    key={index}
-                    className={`${
-                      selectedSubSubCategory === subSubCategory.name
-                        ? "selected"
-                        : ""
-                    }`}
-                    onClick={() =>
-                      setSelectedSubSubCategory(subSubCategory.name)
-                    }
-                  >
-                    {subSubCategory.name}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+            {subCategories.length > 0 && (
+              <div className="dropdown">
+                <ul>
+                  {subCategories.map((subCategory, index) => (
+                    <li
+                      key={index}
+                      className={`${
+                        selectedSubCategory === subCategory.name
+                          ? "selected"
+                          : ""
+                      }`}
+                      onClick={() => {
+                        setSelectedSubCategory(subCategory.name);
+                        setSubSubCategories(subCategory.subcategories || []);
+                      }}
+                    >
+                      {subCategory.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
-          <div className="image_upload_section">
-            <div className="bg-gray-200 path_container">
-              {selectedPath ? (
-                <h4>{selectedPath}</h4>
-              ) : (
-                "No category or subcategory selected"
-              )}
-            </div>
-            <div className="image_text_container">
-              {isImgSelected ? (
-                "image is selected"
-              ) : (
-                <img
-                  src="/images/placeholder-image.png"
-                  alt="placeholder-image"
-                />
-              )}
+            {subSubCategories.length > 0 && (
+              <div className="dropdown">
+                <ul>
+                  {subSubCategories.map((subSubCategory, index) => (
+                    <li
+                      key={index}
+                      className={`${
+                        selectedSubSubCategory === subSubCategory.name
+                          ? "selected"
+                          : ""
+                      }`}
+                      onClick={() =>
+                        setSelectedSubSubCategory(subSubCategory.name)
+                      }
+                    >
+                      {subSubCategory.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div className="image_upload_section">
+              <div className="bg-gray-200 path_container">
+                {selectedPath ? (
+                  <h4>{selectedPath}</h4>
+                ) : (
+                  "No category or subcategory selected"
+                )}
+              </div>
+              <div className="image_text_container">
+                {!isImgSelected && (
+                  <>
+                    <img
+                      src="/images/placeholder-image.png"
+                      alt="placeholder-image"
+                    />
+                    <span className="font-normal text-[14px] pt-2">
+                      Please provide only front image for <br /> each product
+                    </span>
+                    <div className="image_upload_btn">
+                      <MdFileUpload color="#fff" size={19} />
+                      <label htmlFor="file-input" className="cursor-pointer">
+                        Add Product image
+                      </label>
+                      <input
+                        id="file-input"
+                        placeholder="Add product image"
+                        type="file"
+                        onChange={handleImageUpload}
+                        className="hidden"
+                      />
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
       {/* search section end */}
+      {/* Product details section start */}
+      {isAddProduct && (
+        <div className="product_details_main">
+          <div className="selected_img_parent">
+            <img src={file} alt="selected_img" className="selected_img" />
+            <div className="more_img_btn cursor-pointer">
+              <FaPlus size={16} color="#0132c5" />
+            </div>
+            <span className="add_product_text font-medium text-[15px] cursor-pointer">
+              Add Product
+            </span>
+          </div>
+          sjkcb
+        </div>
+      )}
+      {/* Product details section end */}
     </div>
   );
 };
