@@ -297,7 +297,101 @@ const SingleCatalog: React.FC = () => {
               Add Product
             </span>
           </div>
-          sjkcb
+          <br />
+
+          <div className="add_details_section">
+            <div className="details_left_section">
+              <span className="add_product_details_text text-[17px] font-medium pt-6">
+                Add Product Details
+              </span>
+              <div className="copy_details_section">
+                <input
+                  id="copy_details"
+                  name="copy_details"
+                  type="checkbox"
+                  className="cursor-pointer accent-[#3a62db] size-4"
+                />
+                <label
+                  htmlFor="copy_details"
+                  className="font-light text-[14px] leading-[20px]"
+                >
+                  Copy input details to all product.
+                  <br />
+                  If you want to change specific fields for particular product
+                  like Color, Fabric etc, you can change it by selecting that
+                  product.
+                </label>
+              </div>
+              <span className="text-[15px] font-normal pt-4">
+                Product, Size and Inventory
+              </span>
+              <div className="product_details_input_container mt-8">
+                <div className="w-[100%] flex justify-start gap-6 flex-wrap">
+                  <div className="flex items-start gap-2">
+                    <label htmlFor="weight">
+                      Net Weight <br /> (gms)
+                      <span className="text-red-600">&nbsp;*</span>
+                    </label>
+                    <input
+                      id="weight"
+                      name="weight"
+                      title="weight"
+                      type="number"
+                      required={true}
+                      placeholder="Enter Net weight (gms)"
+                      className="w-[200px] p-4 text-[13px]"
+                    />
+                  </div>
+                  <div className="flex gap-2">
+                    <label htmlFor="SC/P_id">
+                      Style code/
+                      <br />
+                      Product ID
+                    </label>
+                    <input
+                      id="SC/P_id"
+                      name="SC/P_id"
+                      title="SC/P_id"
+                      type="number"
+                      placeholder="Enter Style code/ Product ID"
+                      className="w-[200px] p-4 text-[13px]"
+                    />
+                  </div>
+                </div>
+                <div className="flex justify-start gap-6 flex-wrap mt-4">
+                  <div className="flex gap-2">
+                    <label htmlFor="p_name">
+                      Product <br />
+                      Name <span className="text-red-600">&nbsp;*</span>
+                    </label>
+                    <input
+                      id="p_name"
+                      name="p_name"
+                      title="p_name"
+                      type="text"
+                      required={true}
+                      placeholder="Enter Product name"
+                      className="w-[200px] p-4 text-[13px]"
+                    />
+                  </div>
+                  <div className="flex gap-2">
+                    <label htmlFor="size">
+                      Size<span className="text-red-600">&nbsp;*</span>
+                    </label>
+                    <input
+                      id="size"
+                      name="size"
+                      title="size"
+                      type="number"
+                      placeholder="Enter size of product"
+                      className="w-[200px] p-4 text-[13px]"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="details_right_section">sdjk</div>
+          </div>
         </div>
       )}
       {/* Product details section end */}
