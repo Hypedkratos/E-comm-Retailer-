@@ -1,8 +1,11 @@
 /* default imports */
 import React from "react";
 import { useState } from "react";
-import "./BulkUpload.css";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./BulkUpload.css";
+
 /* icons */
 import { GiShop } from "react-icons/gi";
 import { FaChevronDown } from "react-icons/fa6";
@@ -53,29 +56,11 @@ const BulkUpload: React.FC = () => {
 
   const handleRemoveImage = (index: number) => {
     setUploadedImages((prevImages) => {
+      toast.info("Image removed!");
       const updatedImages = [...prevImages];
       updatedImages.splice(index, 1);
       return updatedImages;
     });
-  };
-
-  const handleGetLink = () => {
-    setIsUploading(true);
-    setTimeout(() => {
-      setIsUploading(false);
-      setIsUploaded(true);
-    }, 3000);
-  };
-
-  const handleCopyLink = (link: string) => {
-    navigator.clipboard
-      .writeText(link)
-      .then(() => {
-        alert("Link copied to clipboard!");
-      })
-      .catch((error) => {
-        console.error("Failed to copy the link: ", error);
-      });
   };
 
   const generateRandomString = (length: number): string => {
@@ -85,6 +70,27 @@ const BulkUpload: React.FC = () => {
       characters.charAt(Math.floor(Math.random() * characters.length))
     ).join("");
   };
+
+  const handleGetLink = () => {
+    setIsUploading(true);
+    setTimeout(() => {
+      setIsUploading(false);
+      setIsUploaded(true);
+      toast.info("Images uploaded to AWS S3!");
+    }, 3000);
+  };
+
+  const handleCopyLink = (link: string) => {
+    navigator.clipboard
+      .writeText(link)
+      .then(() => {
+        toast.info("Link copied to clipboard!");
+      })
+      .catch((error) => {
+        toast.error("Failed to copy link: " + error);
+      });
+  };
+
   return (
     <div className="bulk_upload_main_container">
       {/* sidebar section start */}
@@ -269,7 +275,10 @@ const BulkUpload: React.FC = () => {
                       >
                         Copy Link
                       </button>
-                      <button className="action_btn remove_btn">
+                      <button
+                        className="action_btn remove_btn"
+                        onClick={() => handleRemoveImage(index)}
+                      >
                         Remove Image
                       </button>
                     </td>
@@ -292,6 +301,7 @@ const BulkUpload: React.FC = () => {
           </div>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 };
