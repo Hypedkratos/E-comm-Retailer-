@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import "./SingleCatalog.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 /* icons */
 import { IoChevronBackOutline, IoSearchOutline } from "react-icons/io5";
 import { TbBrandYoutubeFilled } from "react-icons/tb";
@@ -9,11 +10,13 @@ import { BiSupport } from "react-icons/bi";
 import { MdFileUpload } from "react-icons/md";
 import { FaCircleCheck } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
+import { FaCircleExclamation } from "react-icons/fa6";
 /* components */
 import mockData from "../assets/mockData/categoryMockData.json";
 /* interfaces */
 
 const SingleCatalog: React.FC = () => {
+  const navigate = useNavigate();
   const [isAddProduct, setIsAddProduct] = useState(false);
   const [categories] = useState(mockData.categories);
   const [searchTerm, setSearchTerm] = useState("");
@@ -25,6 +28,7 @@ const SingleCatalog: React.FC = () => {
   const [selectedPath, setSelectedPath] = useState("");
   const [isImgSelected, setIsImgSelected] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   // Update subcategories when a main category is selected
   useEffect(() => {
     if (selectedCategory) {
@@ -100,6 +104,14 @@ const SingleCatalog: React.FC = () => {
       setIsImgSelected(true);
       setIsAddProduct(true);
     }
+  };
+
+  const handleSave = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      navigate("/");
+    }, 6000);
   };
 
   return (
@@ -299,7 +311,7 @@ const SingleCatalog: React.FC = () => {
           </div>
           <br />
 
-          <div className="add_details_section">
+          <form action="" className="add_details_section">
             <div className="details_left_section">
               <span className="add_product_details_text text-[17px] font-medium pt-6">
                 Add Product Details
@@ -315,7 +327,7 @@ const SingleCatalog: React.FC = () => {
                   htmlFor="copy_details"
                   className="font-light text-[14px] leading-[20px]"
                 >
-                  Copy input details to all product.
+                  Copy input details to all products.
                   <br />
                   If you want to change specific fields for particular product
                   like Color, Fabric etc, you can change it by selecting that
@@ -326,7 +338,7 @@ const SingleCatalog: React.FC = () => {
                 Product, Size and Inventory
               </span>
               <div className="product_details_input_container mt-8">
-                <div className="w-[100%] flex justify-start gap-6 flex-wrap">
+                <div className="w-[100%] flex justify-between gap-6 flex-wrap">
                   <div className="flex items-start gap-2">
                     <label htmlFor="weight">
                       Net Weight <br /> (gms)
@@ -358,11 +370,14 @@ const SingleCatalog: React.FC = () => {
                     />
                   </div>
                 </div>
-                <div className="flex justify-start gap-6 flex-wrap mt-4">
+                <div className="w-[100%] flex justify-between gap-6 flex-wrap mt-4">
                   <div className="flex gap-2">
                     <label htmlFor="p_name">
                       Product <br />
-                      Name <span className="text-red-600">&nbsp;*</span>
+                      Name{" "}
+                      <span className="text-red-600">
+                        &nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      </span>
                     </label>
                     <input
                       id="p_name"
@@ -376,7 +391,10 @@ const SingleCatalog: React.FC = () => {
                   </div>
                   <div className="flex gap-2">
                     <label htmlFor="size">
-                      Size<span className="text-red-600">&nbsp;*</span>
+                      Size
+                      <span className="text-red-600">
+                        &nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;
+                      </span>
                     </label>
                     <input
                       id="size"
@@ -389,9 +407,104 @@ const SingleCatalog: React.FC = () => {
                   </div>
                 </div>
               </div>
+              <span className="text-[15px] font-normal pt-4">
+                Product details
+              </span>
+              <div className="product_details_input_container mt-8">
+                <div className="w-[100%] flex justify-between gap-6 flex-wrap">
+                  <div className="flex items-start gap-2">
+                    <label htmlFor="color">
+                      Color
+                      <span className="text-red-600">
+                        &nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      </span>
+                    </label>
+                    <input
+                      id="color"
+                      name="color"
+                      title="color"
+                      type="text"
+                      required={true}
+                      placeholder="Product color"
+                      className="w-[200px] p-4 text-[13px]"
+                    />
+                  </div>
+                  <div className="flex gap-2">
+                    <label htmlFor="material">
+                      Material
+                      <span className="text-red-600">&nbsp;*</span>
+                    </label>
+                    <input
+                      id="material"
+                      name="material"
+                      title="material"
+                      type="text"
+                      required={true}
+                      placeholder="Material type"
+                      className="w-[200px] p-4 text-[13px]"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="details_right_section">sdjk</div>
-          </div>
+            <div className="details_right_section ">
+              <div className="follow_guideline_box">
+                <FaCircleExclamation size={17} color="#ddd604" />
+                <span className="text-[14px] text-nowrap">
+                  Follow guidelines to reduce quality failure
+                </span>
+              </div>
+              <div className="guideline_text_link_container mt-[18px] px-2">
+                <span className="text-[14px] font-medium">
+                  Image Guidelines
+                </span>
+                <span className="font-medium text-[14px] text-[#0132c5] cursor-pointer">
+                  View full image guidelines
+                </span>
+              </div>
+              <div className="guidelines_text mt-4 font-normal text-[14px] text-gray-500">
+                <span className="flex justify-center items-baseline gap-2">
+                  <div className="guideline_number">1</div>
+                  Images with text/watermark are not acceptable in primary
+                  images.
+                </span>
+                <span className="flex justify-center items-baseline gap-2">
+                  <div className="guideline_number">2</div>
+                  Product image must not have any text.
+                </span>
+                <span className="flex justify-center items-baseline gap-2">
+                  <div className="guideline_number">3</div>
+                  Please add solo product image without any props.
+                </span>
+              </div>
+            </div>
+            <div className="form_btns_container">
+              <div className="discard_btn_container">
+                <button type="reset" className="discard_btn">
+                  Discard Catalog
+                </button>
+              </div>
+              <div className="save_go_back_and_save_btn_container">
+                <button className="save_and_go_back_btn">
+                  Save and Go back
+                </button>
+                <div className="save_btn" onClick={handleSave}>
+                  Save
+                </div>
+              </div>
+            </div>
+          </form>
+          {isLoading && (
+            <div className="loading_screen">
+              <div className="loading_overlay"></div>
+              <div className="loading_card">
+                <span className="loader"></span>
+                <span className="laoding_text">
+                  Please wait... We are listing your product
+                </span>
+              </div>
+            </div>
+          )}
         </div>
       )}
       {/* Product details section end */}
