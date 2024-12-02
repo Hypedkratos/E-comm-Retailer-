@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import "./SingleCatalog.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 /* icons */
 import { IoChevronBackOutline, IoSearchOutline } from "react-icons/io5";
 import { TbBrandYoutubeFilled } from "react-icons/tb";
@@ -103,6 +105,7 @@ const SingleCatalog: React.FC = () => {
       setFile(URL.createObjectURL(e.target.files[0]));
       setIsImgSelected(true);
       setIsAddProduct(true);
+      toast.info("Product image uploaded successfully!");
     }
   };
 
@@ -110,8 +113,15 @@ const SingleCatalog: React.FC = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      navigate("/");
+      toast.info("Product added successfully!");
     }, 6000);
+    setTimeout(() => {
+      navigate("/");
+    }, 8000);
+  };
+
+  const handleNeedHelp = () => {
+    toast.error("This feature is under progress!");
   };
 
   return (
@@ -166,7 +176,10 @@ const SingleCatalog: React.FC = () => {
         </div>
         <div className="need_help_btn">
           <BiSupport size={22} color="#2022a5" />
-          <span className="need_help_btn_text text-[14px] font-medium text-[#2022a5]">
+          <span
+            className="need_help_btn_text text-[14px] font-medium text-[#2022a5]"
+            onClick={handleNeedHelp}
+          >
             Need Help?
           </span>
         </div>
@@ -508,6 +521,7 @@ const SingleCatalog: React.FC = () => {
         </div>
       )}
       {/* Product details section end */}
+      <ToastContainer />
     </div>
   );
 };
