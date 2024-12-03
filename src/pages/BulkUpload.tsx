@@ -44,6 +44,7 @@ const BulkUpload: React.FC = () => {
 
     if (files) {
       const newImages = Array.from(files).map((file) => ({
+        id: crypto.randomUUID(),
         file,
         preview: URL.createObjectURL(file),
         s3Link: `https://s3.amazonaws.com/your-bucket-name/${generateRandomString(

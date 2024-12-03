@@ -97,15 +97,19 @@ const SingleCatalog: React.FC = () => {
   }, [searchTerm, categories]);
 
   // functions
-  const handleImageUpload = (e) => {
-    if (selectedPath == "") {
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (selectedPath === "") {
       alert("Please select a category first");
-    } else {
-      console.log(e.target.files);
-      setFile(URL.createObjectURL(e.target.files[0]));
+      return;
+    }
+
+    if (e.target.files && e.target.files.length > 0) {
+      setFile(e.target.files[0]);
       setIsImgSelected(true);
       setIsAddProduct(true);
       toast.info("Product image uploaded successfully!");
+    } else {
+      console.warn("No file selected or files list is empty");
     }
   };
 
@@ -314,7 +318,11 @@ const SingleCatalog: React.FC = () => {
       {isAddProduct && (
         <div className="product_details_main">
           <div className="selected_img_parent">
-            <img src={file} alt="selected_img" className="selected_img" />
+            <img
+              src={file ? URL.createObjectURL(file) : undefined}
+              alt="selected_img"
+              className="selected_img"
+            />
             <div className="more_img_btn cursor-pointer">
               <FaPlus size={16} color="#0132c5" />
             </div>
