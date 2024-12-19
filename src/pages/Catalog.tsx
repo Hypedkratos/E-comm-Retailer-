@@ -27,11 +27,11 @@ const Catalog: React.FC = () => {
         </span>
         <div className="catalog_instructions_container">
           <span className="catalog_individual_instructions">
-            Click on 'Catalog Upload' button in menu to upload your product.
+            1). Click on 'Catalog Upload' button in menu to upload your product.
           </span>
           <span className="catalog_individual_instructions">
-            Click on 'Image Bulk Upload' button in menu to upload images for a
-            product in bulk.
+            2). Click on 'Image Bulk Upload' button in menu to upload images for
+            a product in bulk.
           </span>
         </div>
       </div>
